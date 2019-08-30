@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import * as api from '../../../api/login';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -30,10 +30,11 @@ class Login extends Component {
     if (redirectToDashboard) return <Redirect to={{ pathname: "/dashboard" }} />;
     
     return (
-      <div className="App">
+      <div className="signin-block">
         <h2> Sign In </h2>
         <form onSubmit={(e) => {this.onSubmit(e)}}>
           <input
+            className="form-input"
             ref='emailInput'
             type='text'
             onChange={(e) => { this.setState({ email: e.target.value }) }}
@@ -41,15 +42,22 @@ class Login extends Component {
             placeholder='Email' />
           <br/>
           <input
+            className="form-input"
             ref='passwordInput'
             type='password'
             onChange={(e) => { this.setState({ password: e.target.value }) }}
             value={this.state.password}
             placeholder='Password' />
           <br/>
-          <button> Login </button>
+
+          <div>
+            <input type="checkbox" id="keep-logged" />
+            <label for="keep-logged"> Keep me logged </label>
+            <a href='/password-forgotten' style={{ color: 'white', marginLeft: '10px' }}> Forgot your password ?</a><br/>
+          </div>
+
+          <button class="example_b"> Login </button>
         </form>
-        <Link to="/password-forgotten"><p> PasswordForgotten </p></Link> 
       </div>
     );
   }
