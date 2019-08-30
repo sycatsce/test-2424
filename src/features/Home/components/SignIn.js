@@ -1,29 +1,37 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
-import * as api from '../../api/login';
+import { Link, Redirect } from "react-router-dom";
+import * as api from '../../../api/login';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loginAction as login } from './actions';
+import { loginAction as login } from '../redux/actions';
 
 
 class Login extends Component {
   constructor() {
     super();
-    this.state = {email: 'michael.lawson@reqres.in', password: 'password'}
+    this.state = {email: 'michael.lawson@reqres.in', password: 'password', redirectToDashboard: false}
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    api.login(this.refs.emailInput.value, this.refs.passwordInput.value).then( (token) => {
-      this.props.actions.login(this.refs.emailInput.value);
+    api.login(this.refs.emailInput.value, this.refs.passwordInput.value).then( (res) => {
+      if(res.token){
+        this.props.actions.login(this.refs.emailInput.value);
+        this.setState({ redirectToDashboard: true });
+      }
+      else{
+        console.log('uh');
+      }
     });
   }
 
   render(){
+    let { redirectToDashboard } = this.state;
+    if (redirectToDashboard) return <Redirect to={{ pathname: "/dashboard" }} />;
+    
     return (
       <div className="App">
         <h2> Sign In </h2>
-        {this.props.loggedAs}
         <form onSubmit={(e) => {this.onSubmit(e)}}>
           <input
             ref='emailInput'
