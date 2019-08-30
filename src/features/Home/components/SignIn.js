@@ -20,7 +20,7 @@ class Login extends Component {
         this.setState({ redirectToDashboard: true });
       }
       else{
-        console.log('uh');
+        console.log('Incorrect email');
       }
     });
   }
@@ -56,7 +56,7 @@ class Login extends Component {
             <a href='/password-forgotten' style={{ color: 'white', marginLeft: '10px' }}> Forgot your password ?</a><br/>
           </div>
 
-          <button class="example_b"> Login </button>
+          <button class="custom-button"> Login </button>
         </form>
       </div>
     );

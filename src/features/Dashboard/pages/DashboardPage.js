@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-function DashboardPage() {
-  return (
-      <h2> DashboardPage </h2>
-  );
+
+
+class DashboardPage extends Component {
+
+  render(){
+    return (
+      <div className="App">
+        <h1> Dashboard </h1>
+        <p> Hello {this.props.loggedAs} </p>
+      </div>
+    );
+  }
 }
 
-export default DashboardPage;
+const mapStateToProps = (state) => {
+	return {
+		loggedAs: state.loginReducer.loggedAs
+	}
+}
+
+export default connect(mapStateToProps)(DashboardPage);

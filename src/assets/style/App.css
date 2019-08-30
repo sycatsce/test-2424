@@ -80,7 +80,11 @@
   width: 320px;
 }
 
-.example_b {
+#button-container{
+  width: 200px;
+}
+
+.custom-button {
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
